@@ -22,8 +22,11 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
-      home: const Scaffold(
-        body: CategoriesScreen(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text("Sample"),
+        ),
+        body: const CategoriesScreen(),
       ),
     );
   }
