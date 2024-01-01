@@ -14,8 +14,11 @@ class RecipeScreen extends StatelessWidget {
       ),
       body: Container(
         alignment: Alignment.center,
-        child: const Text(
-          "Image placeholder",
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image.network(meal.imageUrl),
+          ],
         ),
       ),
     );
