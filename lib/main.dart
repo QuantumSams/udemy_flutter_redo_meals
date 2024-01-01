@@ -26,7 +26,7 @@ class App extends StatelessWidget {
       home: const Scaffold(
         body: MealScreen(
           title: "Sample title",
-          meals: dummyMeals,
+          meals: [],
         ),
       ),
     );
