@@ -2,11 +2,12 @@ import "package:flutter/material.dart";
 import "../widget/category_grid_item.dart";
 import "../data/dummy_data.dart";
 import '../model/category.dart';
+import '../model/meal.dart';
 import 'package:redo_meals/screen/meal_screen.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
-
+  const CategoriesScreen({super.key, required this.favoritePressed});
+  final void Function(Meal mealIncoming) favoritePressed;
   //load a different screen -> no need to use statefulWidget
   void _selectCategory(BuildContext context, Category category) {
     Navigator.push(
@@ -17,6 +18,7 @@ class CategoriesScreen extends StatelessWidget {
           meals: dummyMeals
               .where((meal) => meal.categories.contains(category.id))
               .toList(),
+          favoritePressed: favoritePressed,
         ),
       ),
     );

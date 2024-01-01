@@ -3,14 +3,25 @@ import 'package:flutter/material.dart';
 import '../model/meal.dart';
 
 class RecipeScreen extends StatelessWidget {
-  const RecipeScreen({super.key, required this.meal});
+  const RecipeScreen(
+      {super.key, required this.meal, required this.favoritePressed});
   final Meal meal;
+
+  final void Function(Meal mealIncoming) favoritePressed;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
+        actions: [
+          IconButton(
+            onPressed: () {
+              favoritePressed(meal);
+            },
+            icon: const Icon(Icons.star),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
