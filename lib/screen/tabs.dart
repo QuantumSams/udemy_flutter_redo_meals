@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redo_meals/widget/side_drawer.dart';
 import 'meal_screen.dart';
 import 'categories_screen.dart';
 import '../model/meal.dart';
@@ -21,14 +22,22 @@ class _TabStates extends State<Tabs> {
     });
   }
 
+  void _showFavoriteConfirmation(String message) {
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
   void _alterFavoriteMealList(Meal mealIncoming) {
     if (_favoritedMeal.contains(mealIncoming)) {
       setState(() {
         _favoritedMeal.remove(mealIncoming);
+        _showFavoriteConfirmation("Removed from favorite list");
       });
     } else {
       setState(() {
         _favoritedMeal.add(mealIncoming);
+        _showFavoriteConfirmation("Added to favorite list");
       });
     }
   }
@@ -51,6 +60,7 @@ class _TabStates extends State<Tabs> {
     return Scaffold(
       appBar: AppBar(title: Text(activeTitle)),
       body: activeScreen,
+      drawer: const SideDrawer(),
       bottomNavigationBar: BottomNavigationBar(
           onTap: _screenIndexSet,
           currentIndex: screenIndex,

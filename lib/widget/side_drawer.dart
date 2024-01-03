@@ -1,0 +1,46 @@
+import 'package:flutter/material.dart';
+
+class SideDrawer extends StatelessWidget {
+  const SideDrawer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Column(
+        children: [
+          DrawerHeader(
+            padding: const EdgeInsets.all(30),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [
+                Theme.of(context).colorScheme.primaryContainer,
+                Theme.of(context)
+                    .colorScheme
+                    .primaryContainer
+                    .withOpacity(0.75),
+              ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.fastfood,
+                  size: 45,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Let's Dine!",
+                  style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
