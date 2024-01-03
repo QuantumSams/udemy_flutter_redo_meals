@@ -42,6 +42,13 @@ class _TabStates extends State<Tabs> {
     }
   }
 
+  void _onSelectScreen(String screenID) {
+    if (screenID == 'filters') {
+    } else if (screenID == 'menu') {
+      Navigator.of(context).pop();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget activeScreen = CategoriesScreen(
@@ -60,7 +67,9 @@ class _TabStates extends State<Tabs> {
     return Scaffold(
       appBar: AppBar(title: Text(activeTitle)),
       body: activeScreen,
-      drawer: const SideDrawer(),
+      drawer: SideDrawer(
+        onSelectScreen: _onSelectScreen,
+      ),
       bottomNavigationBar: BottomNavigationBar(
           onTap: _screenIndexSet,
           currentIndex: screenIndex,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SideDrawer extends StatelessWidget {
-  const SideDrawer({super.key});
+  const SideDrawer({super.key, required this.onSelectScreen});
+
+  final void Function(String screenId) onSelectScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,9 @@ class SideDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              onSelectScreen('menu');
+            },
             leading: Icon(
               Icons.restaurant,
               color: Theme.of(context).colorScheme.onBackground,
@@ -54,14 +58,16 @@ class SideDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              onSelectScreen('filters');
+            },
             leading: Icon(
               Icons.settings,
               color: Theme.of(context).colorScheme.onBackground,
               size: 30,
             ),
             title: Text(
-              "Filter",
+              "Filters",
               style: Theme.of(context).textTheme.displaySmall!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
