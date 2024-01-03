@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:redo_meals/screen/filter.dart';
-import 'package:redo_meals/widget/side_drawer.dart';
+import 'filter.dart';
+import '../widget/side_drawer.dart';
 import 'meal_screen.dart';
 import 'categories_screen.dart';
 import '../model/meal.dart';
@@ -46,7 +46,7 @@ class _TabStates extends State<Tabs> {
   void _onSelectScreen(String screenID) {
     Navigator.of(context).pop();
     if (screenID == 'filters') {
-      Navigator.of(context).push(
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (ctx) => const Filter(),
         ),

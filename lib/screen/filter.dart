@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:redo_meals/widget/filter_switch.dart';
 import 'tabs.dart';
 import '../widget/side_drawer.dart';
 
-class Filter extends StatefulWidget {
+class Filter extends StatelessWidget {
   const Filter({super.key});
 
   @override
-  State<Filter> createState() {
-    return _FilterState();
-  }
-}
-
-class _FilterState extends State<Filter> {
-  var _isGlutenChecked = false;
-
-  @override
   Widget build(BuildContext context) {
+    var isGlutenChecked = false;
+    var isLactoseChecked = false;
+    var isVegetarianChecked = false;
+    var isVeganChecked = false;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Filters'),
@@ -23,34 +19,17 @@ class _FilterState extends State<Filter> {
       drawer: SideDrawer(onSelectScreen: (screenID) {
         Navigator.of(context).pop;
         if (screenID == 'menu') {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (ctx) => const Tabs()));
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (ctx) => const Tabs()));
         }
       }),
-      body: Column(
+      body: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 4),
         children: [
-          SwitchListTile(
-            value: _isGlutenChecked,
-            onChanged: (isChecked) {
-              setState(() {
-                _isGlutenChecked = isChecked;
-              });
-            },
-            title: Text(
-              'Gluten-free',
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium!
-                  .copyWith(color: Theme.of(context).colorScheme.onBackground),
-            ),
-            subtitle: Text(
-              'Subtitle sample',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(color: Theme.of(context).colorScheme.onBackground),
-            ),
-          )
+          FilterSwitch(title: 'Gluten-free', currentStatus: isGlutenChecked),
+          FilterSwitch(title: 'Lactos-free', currentStatus: isLactoseChecked),
+          FilterSwitch(title: 'Vegetarian', currentStatus: isVegetarianChecked),
+          FilterSwitch(title: 'Vegan', currentStatus: isVeganChecked)
         ],
       ),
     );
