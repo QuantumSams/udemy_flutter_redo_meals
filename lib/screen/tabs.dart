@@ -43,14 +43,16 @@ class _TabStates extends State<Tabs> {
     }
   }
 
-  void _onSelectScreen(String screenID) {
+  void _onSelectScreen(String screenID) async {
     Navigator.of(context).pop();
     if (screenID == 'filters') {
-      Navigator.of(context).pushReplacement(
+      final filterStatusMap =
+          await Navigator.of(context).push<Map<FilterType, bool>>(
         MaterialPageRoute(
           builder: (ctx) => const Filter(),
         ),
       );
+      print(filterStatusMap);
     }
   }
 

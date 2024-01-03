@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 
 class FilterSwitch extends StatefulWidget {
   const FilterSwitch(
-      {super.key, required this.title, required this.currentStatus});
+      {super.key,
+      required this.title,
+      required this.currentStatus,
+      required this.switchIndividual});
 
   final String title;
   final bool currentStatus;
+  final void Function(bool isChecked) switchIndividual;
 
   @override
   State<FilterSwitch> createState() {
@@ -30,6 +34,7 @@ class _FilterSwitchState extends State<FilterSwitch> {
         setState(() {
           curStatus = isChecked;
         });
+        widget.switchIndividual(isChecked);
       },
       title: Text(
         widget.title,
