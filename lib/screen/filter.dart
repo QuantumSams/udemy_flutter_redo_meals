@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'tabs.dart';
+import '../widget/side_drawer.dart';
 
 class Filter extends StatefulWidget {
   const Filter({super.key});
@@ -18,6 +20,13 @@ class _FilterState extends State<Filter> {
       appBar: AppBar(
         title: const Text('Filters'),
       ),
+      drawer: SideDrawer(onSelectScreen: (screenID) {
+        Navigator.of(context).pop;
+        if (screenID == 'menu') {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (ctx) => const Tabs()));
+        }
+      }),
       body: Column(
         children: [
           SwitchListTile(

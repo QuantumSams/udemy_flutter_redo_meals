@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screen/tabs.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'screen/filter.dart';
 
 final theme = ThemeData(
   useMaterial3: true,
@@ -24,8 +23,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       theme: theme,
       home: const Scaffold(
-        // body: Tabs(),
-        body: Filter(),
+        body: Tabs(),
       ),
     );
   }
