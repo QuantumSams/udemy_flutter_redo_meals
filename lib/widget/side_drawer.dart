@@ -38,6 +38,34 @@ class SideDrawer extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: Icon(
+              Icons.restaurant,
+              color: Theme.of(context).colorScheme.onBackground,
+              size: 30,
+            ),
+            title: Text(
+              "Menu",
+              style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: Icon(
+              Icons.settings,
+              color: Theme.of(context).colorScheme.onBackground,
+              size: 30,
+            ),
+            title: Text(
+              "Filter",
+              style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
           )
         ],
       ),
