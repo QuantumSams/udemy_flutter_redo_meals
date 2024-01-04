@@ -4,7 +4,8 @@ import 'package:redo_meals/widget/filter_switch.dart';
 enum FilterType { gluten, lactose, vegetarian, vegan }
 
 class Filter extends StatefulWidget {
-  const Filter({super.key});
+  const Filter({super.key, required this.savedFilterToggle});
+  final Map<FilterType, bool> savedFilterToggle;
 
   @override
   State<Filter> createState() => _FilterState();
@@ -15,6 +16,16 @@ class _FilterState extends State<Filter> {
   var isLactoseChecked = false;
   var isVegetarianChecked = false;
   var isVeganChecked = false;
+
+  @override
+  void initState() {
+    isGlutenChecked = widget.savedFilterToggle[FilterType.gluten]!;
+    isLactoseChecked = widget.savedFilterToggle[FilterType.lactose]!;
+    isVegetarianChecked = widget.savedFilterToggle[FilterType.vegetarian]!;
+    isVeganChecked = widget.savedFilterToggle[FilterType.vegan]!;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     void switchGluten(bool isChecked) {
