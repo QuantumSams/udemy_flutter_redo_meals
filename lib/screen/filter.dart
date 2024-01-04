@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:redo_meals/widget/filter_switch.dart';
+import '../provider/filters_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-enum FilterType { gluten, lactose, vegetarian, vegan }
-
-class Filter extends StatefulWidget {
-  const Filter({super.key, required this.savedFilterToggle});
-  final Map<FilterType, bool> savedFilterToggle;
+class Filter extends ConsumerStatefulWidget {
+  const Filter({super.key});
 
   @override
-  State<Filter> createState() => _FilterState();
+  ConsumerState<Filter> createState() => _FilterState();
 }
 
-class _FilterState extends State<Filter> {
+class _FilterState extends ConsumerState<Filter> {
   var isGlutenChecked = false;
   var isLactoseChecked = false;
   var isVegetarianChecked = false;
@@ -19,10 +18,11 @@ class _FilterState extends State<Filter> {
 
   @override
   void initState() {
-    isGlutenChecked = widget.savedFilterToggle[FilterType.gluten]!;
-    isLactoseChecked = widget.savedFilterToggle[FilterType.lactose]!;
-    isVegetarianChecked = widget.savedFilterToggle[FilterType.vegetarian]!;
-    isVeganChecked = widget.savedFilterToggle[FilterType.vegan]!;
+    final savedFilterToggle = ref.read(filtersProvider);
+    isGlutenChecked = savedFilterToggle[FilterType.gluten]!;
+    isLactoseChecked = savedFilterToggle[FilterType.lactose]!;
+    isVegetarianChecked = savedFilterToggle[FilterType.vegetarian]!;
+    isVeganChecked = savedFilterToggle[FilterType.vegan]!;
     super.initState();
   }
 
@@ -58,13 +58,13 @@ class _FilterState extends State<Filter> {
       ),
       body: WillPopScope(
         onWillPop: () async {
-          Navigator.of(context).pop({
+          ref.read(filtersProvider.notifier).setAllFilters({
             FilterType.gluten: isGlutenChecked,
             FilterType.lactose: isLactoseChecked,
             FilterType.vegetarian: isVegetarianChecked,
             FilterType.vegan: isVeganChecked
           });
-          return false;
+          return true;
         },
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 4),

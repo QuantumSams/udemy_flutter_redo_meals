@@ -6,9 +6,9 @@ import '../model/meal.dart';
 import 'package:redo_meals/screen/meal_screen.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key, required this.favoritePressed, required this.filteredMeals});
+  const CategoriesScreen({super.key, required this.filteredMeals});
   final List<Meal> filteredMeals;
-  final void Function(Meal mealIncoming) favoritePressed;
+  
   //load a different screen -> no need to use statefulWidget
   void _selectCategory(BuildContext context, Category category) {
     Navigator.push(
@@ -18,8 +18,7 @@ class CategoriesScreen extends StatelessWidget {
           title: category.title,
           meals: filteredMeals
               .where((meal) => meal.categories.contains(category.id))
-              .toList(),
-          favoritePressed: favoritePressed,
+              .toList(),          
         ),
       ),
     );
