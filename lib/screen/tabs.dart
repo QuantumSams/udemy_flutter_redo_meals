@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:redo_meals/data/dummy_data.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../data/dummy_data.dart';
 import 'filter.dart';
 import '../widget/side_drawer.dart';
 import 'meal_screen.dart';
 import 'categories_screen.dart';
 import '../model/meal.dart';
+import '../provider/meal_provider.dart';
 
 const kFilterBool = {
   FilterType.gluten: false,
@@ -13,16 +15,16 @@ const kFilterBool = {
   FilterType.vegan: false,
 };
 
-class Tabs extends StatefulWidget {
+class Tabs extends ConsumerStatefulWidget {
   const Tabs({super.key});
 
   @override
-  State<Tabs> createState() {
+  ConsumerState<Tabs> createState() {
     return _TabStates();
   }
 }
 
-class _TabStates extends State<Tabs> {
+class _TabStates extends ConsumerState<Tabs> {
   int screenIndex = 0;
   final List<Meal> _favoritedMeal = [];
   Map<FilterType, bool> filterBool = kFilterBool;
@@ -68,10 +70,10 @@ class _TabStates extends State<Tabs> {
       });
     }
   }
-
   @override
   Widget build(BuildContext context) {
-    final filteredMeals = dummyMeals.where(
+    final providedMeal = ref.watch(mealProvider);
+    final filteredMeals = providedMeal.where(
       (meal) {
         if (filterBool[FilterType.gluten] == true && !meal.isGlutenFree) {
           return false;
